@@ -6,6 +6,10 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
         },
         // DEFINE YOUR MODEL HERE
+        phonenumber: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        }
     });
   
     return Phone;

@@ -9,6 +9,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 80:80
+    depends_on:
+      - frontend
+    links:
+      - frontend
       
   frontend:
     build: 
@@ -16,6 +20,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - 3000:3000
+    depends_on:
+      - api
+    links:
+      - api
     volumes:
       - ./frontend:/app
   
@@ -25,6 +33,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - 5000:5000
+    links:
+      - db
     volumes:
       - ./api:/app
 
