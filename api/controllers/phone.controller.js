@@ -79,11 +79,11 @@ exports.delete = (req, res) => {
     .then(num => {
         if (num == 1) {
             res.send({
-                message: "Phone was Deleted successfully."
+                message: `Phone with id ${id} was Deleted successfully.`
             });
         } else {
             res.send({
-                message: `Cannot delete phone`
+                message: `Phone with id ${id} not found and cannot be deleted`
             });
         }
     })

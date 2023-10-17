@@ -73,11 +73,10 @@ exports.update = (req, res) => {
 // Delete one contact by id
 exports.delete = (req, res) => {
     const contactId = req.params.contactId;
-
-    // Step 1: Delete associated phone records
+    // Delete associated phone records first
     Phones.destroy({ where: { contactId: contactId } })
     .then(() => {
-        // Step 2: Delete the contact
+        // Then delete the contact so it doesnt violate referential integrity
         Contacts.destroy({ where: { id: contactId } })
         .then((numDeleted) => {
             if (numDeleted == 1) {
