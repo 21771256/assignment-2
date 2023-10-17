@@ -4,12 +4,12 @@ const Op = db.Sequelize.Op;
 
 // Create phone
 exports.create = (req, res) => {
-    const phone = {
+    const phones = {
         name: req.body.name,
-        number: req.body.number,
-        contactId: req.params.contactId,
+        phoneNumber: req.body.phoneNumber,
+        contactID: req.body.contactID
     };
-    Phones.create(phone)
+    Phones.create(phones)
         .then(data => {
             res.send(data);
         })
@@ -22,7 +22,7 @@ exports.create = (req, res) => {
 
 // Get all phones
 exports.findAll = (req, res) => {
-    const contactid = req.params.contactId
+    const contactid = req.params.contactID
     Phones.findAll({where: {contactID: contactid}})
         .then(data => {
             res.send(data);
@@ -36,7 +36,7 @@ exports.findAll = (req, res) => {
 
 // Get one phone by id
 exports.findOne = (req, res) => {
-    const id = req.params.phoneId;
+    const id = req.params.id;
     Phones.findByPk(id)
         .then(data => {
             res.send(data);
@@ -50,7 +50,7 @@ exports.findOne = (req, res) => {
 
 // Update one phone by id
 exports.update = (req, res) => {
-    const id = req.params.phoneId;
+    const id = req.params.id;
     Phones.update(req.body, {
         where: { id: id }
     })
@@ -74,8 +74,10 @@ exports.update = (req, res) => {
 
 // Delete one phone by id
 exports.delete = (req, res) => {
-    const id = req.params.phoneId;
-    Phones.destroy({where: { id: id }})
+    const id = req.params.phoneid;
+    Phones.destroy(req.body, {
+        where: { id: id }
+    })
     .then(num => {
         if (num == 1) {
             res.send({

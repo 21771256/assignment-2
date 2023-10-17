@@ -1,29 +1,27 @@
 const db = require("../models");
+const Contacts = db.contacts;
 const Phones = db.phones;
 const Op = db.Sequelize.Op;
 
-// Create phone
+// Create contact
 exports.create = (req, res) => {
-    const phone = {
-        name: req.body.name,
-        number: req.body.number,
-        contactId: req.params.contactId,
+    const contacts = {
+        name: req.body.name
     };
-    Phones.create(phone)
+    Contacts.create(contacts)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Error in creating phone details"
+                message: err.message || "Error in creating contact"
             });
         });
 };
 
-// Get all phones
+// Get all contacts
 exports.findAll = (req, res) => {
-    const contactid = req.params.contactId
-    Phones.findAll({where: {contactID: contactid}})
+    Contacts.findAll()
         .then(data => {
             res.send(data);
         })
@@ -34,62 +32,62 @@ exports.findAll = (req, res) => {
         });
 };
 
-// Get one phone by id
+// Get one contact by id
 exports.findOne = (req, res) => {
-    const id = req.params.phoneId;
-    Phones.findByPk(id)
+    const id = req.params.contactId
+    Contacts.findByPk(id)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: err.message || "Error in finding one phone"
+                message: err.message || "Error in finding one contact"
             });
         });
 };
 
-// Update one phone by id
+// Update one contact by id
 exports.update = (req, res) => {
-    const id = req.params.phoneId;
-    Phones.update(req.body, {
+    const id = req.params.contactId;
+    Contacts.update(req.body, {
         where: { id: id }
     })
     .then(num => {
         if (num == 1) {
             res.send({
-                message: "Phone was updated successfully."
+                message: "Contact was updated successfully."
             });
         } else {
             res.send({
-                message: `Cannot update phone`
+                message: `Cannot update contact`
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: "Error updating phone with id=" + id
+            message: "Error updating contact with id=" + id
         });
     });
 };
 
-// Delete one phone by id
+// Delete one contact by id
 exports.delete = (req, res) => {
-    const id = req.params.phoneId;
-    Phones.destroy({where: { id: id }})
+    const id = req.params.contactId;
+    Contacts.destroy({where: { id: id }})
     .then(num => {
         if (num == 1) {
             res.send({
-                message: "Phone was updated successfully."
+                message: "Contact was deleted successfully."
             });
         } else {
             res.send({
-                message: `Cannot update phone`
+                message: `Cannot delete contact`
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: "Error updating phone with id=" + id
+            message: err.message || "Error deleting contact with id=" + id
         });
     });
 };

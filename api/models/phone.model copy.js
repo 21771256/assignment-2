@@ -16,6 +16,14 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
         },
 
+        contactID: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: "contacts",
+                key: "id",
+            },
+        },
     });
   
     return Phone;
