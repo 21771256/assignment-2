@@ -23,7 +23,7 @@ exports.create = (req, res) => {
 // Get all phones
 exports.findAll = (req, res) => {
     const contactid = req.params.contactId
-    Phones.findAll({where: {contactID: contactid}})
+    Phones.findAll({where: {contactId: contactid}})
         .then(data => {
             res.send(data);
         })
@@ -79,17 +79,17 @@ exports.delete = (req, res) => {
     .then(num => {
         if (num == 1) {
             res.send({
-                message: "Phone was updated successfully."
+                message: "Phone was Deleted successfully."
             });
         } else {
             res.send({
-                message: `Cannot update phone`
+                message: `Cannot delete phone`
             });
         }
     })
     .catch(err => {
         res.status(500).send({
-            message: "Error updating phone with id=" + id
+            message: "Error deleting phone with id=" + id
         });
     });
 };
