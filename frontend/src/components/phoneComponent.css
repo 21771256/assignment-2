@@ -1,0 +1,20 @@
+.phone-table-haha {
+  display: grid;
+  grid-template-columns: 100px 90px 50px; /* Define the fixed column widths */
+  border-collapse: collapse;
+  width: 100%;
+}   
+.pdescription {
+    width: 210px;
+}
+.pnumber{
+    width: 200px;
+}
+.addPhoneButton {
+    background-color: rgb(0, 255, 0);
+    border: 2px solid black;
+}
+.deletePhoneButton {
+    background-color: rgb(255, 97, 97);
+    border: 2px solid black;
+}

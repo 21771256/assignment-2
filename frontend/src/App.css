@@ -1,0 +1,21 @@
+html, body, .header {
+    font-family: "Times New Roman", serif; 
+    text-align: center;
+    color: #143b5a
+}
+.container {
+    width: 500px; /* Adjust the width as needed */
+    margin-top: -200px; /* Adjust the margin-top value to position slightly higher */
+}
+.frame {
+    border: 2px solid black;
+    text-align: center;
+    padding: 30px 0;
+}
+.description {
+    font-family: 'Brush Script MT', cursive; /* Example font family */
+    color: #FF0000; /* Example color (red) */
+}
+.frame-heading{
+    text-align: center;
+}

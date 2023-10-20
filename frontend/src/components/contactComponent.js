@@ -1,43 +1,33 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Phone from './phoneComponent';
+import './contactComponent.css';
 
-function Contact(props) {
+function Contacts(props) {
+  const [newContact, setNewContact] = useState("");
+  const [detailsVisible, setDetailsVisible] = useState({});
 
-	//console.log(props);
+  // Toggle the visibility of details for a specific contact
+  const toggleDetails = (contactId) => {
+    setDetailsVisible((prevState) => ({
+      ...prevState,
+      [contactId]: !prevState[contactId],
+    }));
+  };
 
-	function deleteOnClick() {
+  function deleteOnClick(contactId) {
 		// Find the contact we want to delete and remove it
-		fetch(`http://localhost/api/contacts/${props.id}`, {
+		fetch(`http://localhost/api/contacts/${contactId}`, {
 			method: 'DELETE',
 		})
 		.then(() => {
 			// remove it from the state
-			props.deleteContact(props.id);
+			deleteContact(contactId);
 		})
 		.catch((error) => {
 			console.error('Error:', error);
 		})
 	}
-
-	return (
-    <div>
-      <button type="button" onClick={deleteOnClick}>Delete</button> 
-      <Phone contactId={props.id} />
-    </div>
-	);
-}
-
-
-function Contactss(props) {
-  const [newContact, setNewContact] = useState("");
-
-  useEffect(() => {
-    
-  }, []);
-
-  //function onChange(event) {
-	//setNewContact(event.target.value);
-//}
+  
   function onClick() {
     if (newContact.trim() === ''){
       alert('Please enter a name for the contact.');
@@ -68,28 +58,38 @@ function Contactss(props) {
 
   return (
     <div>
-	  <div>
-		<input
-			type="text"
-			placeholder="Name"
-			value={newContact}
-			onChange={(e) => setNewContact(e.target.value)}
-		/>
-		<button onClick={onClick}>Create Contact</button>
+      <div class="create-contact">
+        <input
+          type="text"
+          placeholder="Name"
+          value={newContact}
+          onChange={(e) => setNewContact(e.target.value)}
+        />
+        <button onClick={onClick} class="create-button">Create Contact</button>
       </div>
-      <h3>
-		    {props.contacts.map((contact) => (
-          <div key={contact.id}>
-			    {contact.name}
-			    <Contact id={contact.id} deleteContact={deleteContact} />
-			</div>
-		  
+      <div class="contact-info">
+        {props.contacts.map((contact) => (
+          <div key={contact.id} class="contact-details">
+            <span
+              onClick={() => toggleDetails(contact.id)}
+              style={{ cursor: 'pointer' }}
+            >
+              <h3 class="contact-name-delete">
+                {contact.name}
+                  <button type="button" onClick={() => deleteOnClick(contact.id)} class="delete-button">Delete</button>
+              </h3>
+            </span>
+            {detailsVisible[contact.id] && (
+              <div>    
+                <Phone contactId={contact.id} />
+              </div>
+            )}
+          </div>
         ))}
-		
-	  </h3>
-	  
+      </div>
     </div>
   );
 }
 
-export default Contactss;
+
+export default Contacts;

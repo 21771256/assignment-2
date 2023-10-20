@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import Contactss from './components/contactComponent.js';
+import Contacts from './components/contactComponent.js';
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -20,11 +20,11 @@ function App() {
       <div className="frame">
         <h2 className="frame-heading">Contacts</h2>
         <div className="Contact-details">
-          <Contactss contacts={contacts} setContacts={setContacts}/>
+          <Contacts contacts={contacts} setContacts={setContacts}/>
         </div>
       </div>
-      <div className="desciption">
-        <p>Click a contact to view associated phone numbers</p>
+      <div className="description">
+        <p>Click a contact to view or hide associated phone numbers and perform deletion and insertion</p>
       </div>
     </div>
   );

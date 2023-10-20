@@ -1,0 +1,31 @@
+html, body,
+.contact-info {
+    text-align: left;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-top: 10px;
+}
+.create-contact {
+    position: relative;
+}
+.create-contact::after {
+    content: "";
+    position: absolute;
+    bottom: -5px; 
+    left: 0;
+    width: 100%;
+    border-bottom: 2px dotted #000000;
+    padding-bottom: 10px;
+}
+.delete-button {
+    margin-left: 20px;
+    background-color: rgb(255, 97, 97);
+    border: 2px solid black;
+}
+.create-button {
+    background-color: rgb(0, 255, 0);
+    border: 2px solid black;
+}
+.contact-details {
+    border: 2px solid black;
+}
